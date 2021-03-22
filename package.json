@@ -1,0 +1,25 @@
+{
+  "name": "discordJsHelper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "common-tags": "^1.8.0",
+    "discord.js": "github:monbrey/discord.js#inline-replies",
+    "dotenv": "^8.2.0",
+    "fs": "^0.0.1-security",
+    "instagram-api-api": "^0.0.5",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.1",
+    "mongoose": "^5.12.0",
+    "node-fetch": "^2.6.1",
+    "pm2": "^4.5.5",
+    "twitch-api-v5": "^2.0.4"
+  }
+}
