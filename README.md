@@ -44,6 +44,9 @@ Teraz, musisz utworzyć plik `config.json`. W nim będziemy przechowywali więks
 <tr>
 <th>mongo_path</th><th>URI do MongoDB</th><th>Login do bazy danych</th>
 </tr>
+<tr>
+<th>greetChannelId</th><th>ID kanału do powitań</th><th>-</th>
+</tr>
 </table>
 
 Czyli, `config.json` będzie wyglądał tak:
@@ -52,7 +55,8 @@ Czyli, `config.json` będzie wyglądał tak:
 {
   "token": "token",
   "prefix": "prefix",
-  "mongo_path": "mongo-path"
+  "mongo_path": "mongo-path",
+  "greetChannelId": "id kanału"
 }
 ```
 

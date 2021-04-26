@@ -1,6 +1,8 @@
+const config = require('../config.json');
+
 module.exports = async (client, Discord) => {
     client.on('guildMemberAdd', (guildMember, user) => {
-        const channel = guildMember.guild.channels.cache.get('812301230403485747');
+        const channel = guildMember.guild.channels.cache.get(config.greetChannelId);
 
         const embed = new Discord.MessageEmbed()
         .setColor("#FF6161")
@@ -22,3 +24,4 @@ module.exports = async (client, Discord) => {
 }
 
 // https://discord.gg/xNCCMX3m
+// 812301230403485747
