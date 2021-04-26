@@ -61,8 +61,3 @@ Teraz, możesz korzystać z bota!<br>
 ## Błędy oraz propozycje
 
 Jeżeli chcesz coś dodać bądź zgłosić błąd, otwórz <b>pull request</b> bądź <b>issue</b>.
-
-## Do zrobienia:
-
-<!-- <input type="checkbox"> -->
-⬜️ - 
