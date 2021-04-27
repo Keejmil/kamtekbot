@@ -47,7 +47,14 @@ Teraz, musisz utworzyć plik `config.json`. W nim będziemy przechowywali więks
 <tr>
 <th>greetChannelId</th><th>ID kanału do powitań</th><th>-</th>
 </tr>
+<tr>
+<th>suggestChannelId</th><th>ID kanału do sugestii</th><th>-</th>
+</tr>
+<tr>
+<th>ytSuggestChannelId</th><th>ID kanału do sugestii na odcinki</th><th>-</th>
+</tr>
 </table>
+<br><br>
 
 Czyli, `config.json` będzie wyglądał tak:
 
@@ -56,7 +63,9 @@ Czyli, `config.json` będzie wyglądał tak:
   "token": "token",
   "prefix": "prefix",
   "mongo_path": "mongo-path",
-  "greetChannelId": "id kanału"
+  "greetChannelId": "id kanału",
+  "suggestChannelId": "id kanału",
+  "ytSuggestChannelId": "id kanału"
 }
 ```
 

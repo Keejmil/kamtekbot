@@ -1,3 +1,5 @@
+const config = require('../../config.json')
+
 module.exports = {
   name: "suggest",
   aliases: [],
@@ -16,7 +18,7 @@ module.exports = {
     )
       return;
 
-    const channel = message.guild.channels.cache.get("813058397532323900");
+    const channel = message.guild.channels.cache.get(config.suggestChannelId);
     const suggestion = args.join(" ");
 
     if (!suggestion) return message.reply("Nie podałeś propozycji.");

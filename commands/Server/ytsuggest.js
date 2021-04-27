@@ -1,3 +1,5 @@
+const config = require('../../config.json')
+
 module.exports = {
   name: "ytsuggest",
   aliases: ["yt-suggest"],
@@ -16,7 +18,7 @@ module.exports = {
     )
       return;
 
-    const channel = message.guild.channels.cache.get("813318393649954826");
+    const channel = message.guild.channels.cache.get(config.ytSuggestChannelId);
     const suggestion = args.join(" ");
 
     if (!suggestion) return message.reply("Nie podałeś propozycji.");
