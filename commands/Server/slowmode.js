@@ -53,6 +53,20 @@ module.exports = {
       return;
     }
 
+    if (newLimit >= 21600 || "21600") {
+      message.channel.send(
+        new MessageEmbed()
+          .setColor("RED")
+          .setTitle("Error!")
+          .setDescription("Nowy limit nie może przekraczać 6 godzin!")
+          .setFooter(
+            `Komenda wywołana dla ${message.author.username}`,
+            message.author.displayAvatarURL()
+          )
+      );
+      return;
+    }
+
     try {
       message.channel.setRateLimitPerUser(newLimit);
       message.react("813692209748508692");

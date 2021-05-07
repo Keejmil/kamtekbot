@@ -13,7 +13,7 @@ module.exports = {
     usage: "!help <opcjonalnie: nazwa komendy>",
     category: "info",
   },
-  callback : async (message, args, Discord, client) => {
+  callback: async (message, args, Discord, client) => {
     const data = [];
     const { commands } = message.client;
 
@@ -102,38 +102,63 @@ module.exports = {
       //   }
       // )
 
+      // const embed = new MessageEmbed()
+      //   .setTitle("Command Details:")
+      //   .addField("PREFIX:", `\`${prefix}\``)
+      //   .addField(
+      //     "COMMAND:",
+      //     command.name ? `\`${command.name}\`` : "No name for this command."
+      //   )
+      //   .addField(
+      //     "ALIASES:",
+      //     command.aliases
+      //       ? `\`${command.aliases.join("` `")}\``
+      //       : "No aliases for this command."
+      //   )
+      //   .addField(
+      //     "USAGE:",
+      //     command.usage
+      //       ? `\`${prefix}${command.name} ${command.usage}\``
+      //       : `\`${prefix}${command.name}\``
+      //   )
+      //   .addField(
+      //     "DESCRIPTION:",
+      //     command.description
+      //       ? command.description
+      //       : "No description for this command."
+      //   )
+      //   .setFooter(
+      //     `Requested by ${message.author.tag}`,
+      //     message.author.displayAvatarURL({ dynamic: true })
+      //   )
+      //   .setTimestamp()
+      //   .setColor(roleColor);
+
+      const { name, aliases } = command;
+      const { permissions, requiredRoles } = command.user;
+      const { usage, category } = command.description;
+
       const embed = new MessageEmbed()
-        .setTitle("Command Details:")
-        .addField("PREFIX:", `\`${prefix}\``)
-        .addField(
-          "COMMAND:",
-          command.name ? `\`${command.name}\`` : "No name for this command."
-        )
-        .addField(
-          "ALIASES:",
-          command.aliases
-            ? `\`${command.aliases.join("` `")}\``
-            : "No aliases for this command."
-        )
-        .addField(
-          "USAGE:",
-          command.description.usage
-            ? `\`${prefix}${command.name} ${command.usage}\``
-            : `\`${prefix}${command.name}\``
-        )
-        .addField(
-          "DESCRIPTION:",
-          command.description
-            ? command.description
-            : "No description for this command."
+        .setColor("RANDOM")
+        .setTitle(`Komenda ${name}.`)
+        .setDescription(
+          `**Aliasy: **\n\`${aliases.join(
+            " "
+          )}\`\n\n**Potrzebne permisje: **\n\`${
+            permissions.join(" ") || "Nie ma."
+          }\`\n\n**Potrzebne role: **\n${
+            `<@&${requiredRoles}>` || "Nie ma."
+          }\n\n**Użytkowość: **\n\`${command.usage}\`\n\n**Kategoria: **\n\`${
+            command.category
+          }\``
         )
         .setFooter(
-          `Requested by ${message.author.tag}`,
-          message.author.displayAvatarURL({ dynamic: true })
+          `Komenda wywołana dla ${message.author.username}`,
+          message.author.displayAvatarURL()
         )
         .setTimestamp();
 
-        return message.channel.send(embed)
+      return message.channel.send(embed);
     }
   },
 };

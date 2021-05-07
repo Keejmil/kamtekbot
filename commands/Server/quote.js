@@ -1,8 +1,5 @@
 const { MessageEmbed, Message } = require("discord.js");
 module.exports = {
-  /**
-   * @param {Message} message
-   */
   name: "quote",
   aliases: [],
   user: {
@@ -10,18 +7,20 @@ module.exports = {
     requiredRoles: [],
   },
   description: {
-    usage: "!quote <ID Kanału> <ID Wiadomości>",
+    usage: "!quote <ID Wiadomości>",
     category: "Misc",
   },
   callback: async (message, args, Discord, client) => {
-    const channelID = args[0];
-    if (!channelID) {
+    const channel =
+      message.mentions.channels.first() ||
+      message.guild.channels.cache.get(args[0]);
+    if (!channel) {
       message.channel.send(
         new MessageEmbed()
           .setColor("RED")
           .setTitle("Error!")
           .setDescription(
-            "Nie podałeś ID kanału, na którym została wysłana wiadomość!\n\nUżyj `!quote <ID Kanału> <ID Wiadomości>`"
+            "Nie podałeś kanału!\n\nUżyj `!quote <kanał> <id wiadomości>`"
           )
           .setFooter(
             `Komenda wywołana dla ${message.author.username}`,
@@ -30,28 +29,35 @@ module.exports = {
       );
       return;
     }
-
-    const validChannel = message.guild.channels.cache.get(channelID);
 
     const messageID = args[1];
-    if (messageID) {
+    if (!messageID) {
       message.channel.send(
         new MessageEmbed()
           .setColor("RED")
           .setTitle("Error!")
           .setDescription(
-            "Nie podałeś ID wiadomości!\n\nUżyj \`!quote <ID Kanału> <ID Wiadomości>\`"
+            "Nie podałeś ID wiadomości!\n\nUżyj `!quote <kanał> <id wiadomości>`"
           )
           .setFooter(
             `Komenda wywołana dla ${message.author.username}`,
             message.author.displayAvatarURL()
           )
       );
-      return;
     }
 
-    validChannel.messages.fetch(messageID).then((msg) => {
-      message.channel.send(msg.url)
-    })
+    const embed = new MessageEmbed()
+      .setColor("#36393f")
+      .setAuthor(
+        `Na prośbę ${message.author.tag} | ${message.author.id}`,
+        message.author.displayAvatarURL({ dynamic: true })
+      )
+      .setDescription(
+        `**[SKOCZ DO WIADOMOŚCI](${`https://discord.com/channels/${message.guild.id}/${channel.id}/${messageID}`}) z kanału <#${
+          channel.id
+        }>**`
+      );
+
+    message.channel.send(embed);
   },
 };
