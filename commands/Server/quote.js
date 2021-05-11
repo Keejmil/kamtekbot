@@ -46,6 +46,8 @@ module.exports = {
       );
     }
 
+    const reason = args.slice(2).join(' ');
+
     const embed = new MessageEmbed()
       .setColor("#36393f")
       .setAuthor(
@@ -55,7 +57,7 @@ module.exports = {
       .setDescription(
         `**[SKOCZ DO WIADOMOŚCI](${`https://discord.com/channels/${message.guild.id}/${channel.id}/${messageID}`}) z kanału <#${
           channel.id
-        }>**`
+        }>**\n\n**Notka:** ${reason || "Nie podano!"}`
       );
 
     message.channel.send(embed);
