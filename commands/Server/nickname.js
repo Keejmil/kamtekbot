@@ -9,10 +9,17 @@ module.exports = {
     usage: "!nickname <nowy nickname>",
     category: "server",
   },
-  callback : async (message, args, Discord, client) => {
+  callback: async (message, args, Discord, client) => {
     if (!message.member.roles.cache.has("827459422493212692")) {
       message.channel.send(
-        "Nie możesz zmienić swojego nickname'u, ponieważ nie kupiłeś itemu w sklepie!"
+        new MessageEmbed()
+          .setColor("RED")
+          .setTitle("Error!")
+          .setDescription("Aby zmienić nick tą komendą, musisz zakupić item w sklepie serwerowym! (\`!shop\`)")
+          .setFooter(
+            `Komenda wywołana dla ${message.author.username}`,
+            message.author.displayAvatarURL()
+          )
       );
       return;
     }

@@ -1,4 +1,4 @@
-const config = require('../../config.json')
+const config = require("../../config.json");
 
 module.exports = {
   name: "ytsuggest",
@@ -21,7 +21,17 @@ module.exports = {
     const channel = message.guild.channels.cache.get(config.ytSuggestChannelId);
     const suggestion = args.join(" ");
 
-    if (!suggestion) return message.reply("Nie podałeś propozycji.");
+    if (!suggestion)
+      return message.reply(
+        new MessageEmbed()
+          .setColor("RED")
+          .setTitle("Error!")
+          .setDescription("Nie podałeś sugestii!")
+          .setFooter(
+            `Komenda wywołana dla ${message.author.username}`,
+            message.author.displayAvatarURL()
+          )
+      );
 
     const embed = new Discord.MessageEmbed()
       .setColor("#FF0000")
@@ -39,8 +49,17 @@ module.exports = {
         suggestionMessage.react("👎");
       })
       .then(() => {
-        message.reply(
-          `Twoja sugestia została pomyślnie wysłana na ${channel}.`
+        message.channel.send(
+          new MessageEmbed()
+            .setColor("GREEN")
+            .setTitle("Gotowe!")
+            .setDescription(
+              `Pomyślnie wysłano Twoją sugestię na kanał ${channel}`
+            )
+            .setFooter(
+              `Komenda wywołana dla ${message.author.username}`,
+              message.author.displayAvatarURL()
+            )
         );
       });
   },
