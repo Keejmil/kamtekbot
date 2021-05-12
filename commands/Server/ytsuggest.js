@@ -1,4 +1,5 @@
 const config = require("../../config.json");
+const { MessageEmbed } = require("discord.js");
 
 module.exports = {
   name: "ytsuggest",
@@ -42,25 +43,20 @@ module.exports = {
       .addFields({ name: "Propozycja:", value: suggestion })
       .setTimestamp();
 
-    channel
-      .send(embed)
-      .then((suggestionMessage) => {
-        suggestionMessage.react("👍");
-        suggestionMessage.react("👎");
-      })
-      .then(() => {
-        message.channel.send(
-          new MessageEmbed()
-            .setColor("GREEN")
-            .setTitle("Gotowe!")
-            .setDescription(
-              `Pomyślnie wysłano Twoją sugestię na kanał ${channel}`
-            )
-            .setFooter(
-              `Komenda wywołana dla ${message.author.username}`,
-              message.author.displayAvatarURL()
-            )
-        );
-      });
+    channel.send(embed).then((suggestionMessage) => {
+      suggestionMessage.react("👍");
+      suggestionMessage.react("👎");
+    });
+
+    message.channel.send(
+      new MessageEmbed()
+        .setColor("GREEN")
+        .setTitle("Gotowe!")
+        .setDescription(`Pomyślnie wysłano Twoją sugestię na kanał ${channel}`)
+        .setFooter(
+          `Komenda wywołana dla ${message.author.username}`,
+          message.author.displayAvatarURL()
+        )
+    );
   },
 };
