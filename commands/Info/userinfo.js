@@ -1,19 +1,26 @@
-const { MessageEmbed } = require('discord.js')
+const { MessageEmbed } = require("discord.js");
 
 module.exports = {
   name: "userinfo",
-    aliases: ['user-info', 'me', 'ui'],
-    user: {
-        permissions: [],
-        requiredRoles: [],
-    },
-    description: {
-        usage: '!user-info <opcjonalnie: wzmianka użytkownika>',
-        category: 'info',
-    },
-    callback : async (message, args, Discord, client) => {
+  aliases: ["user-info", "me", "ui"],
+  user: {
+    permissions: [],
+    requiredRoles: [],
+  },
+  description: {
+    usage: "!user-info <opcjonalnie: wzmianka użytkownika>",
+    category: "info",
+  },
+  callback: async (message, args, Discord, client) => {
     const user = message.mentions.users.first() || message.author;
     const guildMember = message.guild.members.cache.get(user.id);
+
+    let userbot;
+    if (message.author.bot == true) {
+      userbot = "tak.";
+    } else {
+      userbot = "nie.";
+    }
 
     const embed = new MessageEmbed()
       .setColor("#a51b9d")
@@ -36,7 +43,7 @@ module.exports = {
           value: new Date(user.createdTimestamp).toLocaleDateString(),
         },
         { name: "Ilość ról: ", value: guildMember.roles.cache.size },
-        { name: "Czy jest botem: ", value: user.bot },
+        { name: "Czy jest botem: ", value: userbot },
         { name: "Nickname: ", value: guildMember.nickname || "Nie istnieje." }
       );
 
