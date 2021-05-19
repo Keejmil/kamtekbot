@@ -3,7 +3,7 @@ module.exports = {
   name: "quote",
   aliases: [],
   user: {
-    permissions: ["ADMINISTRATOR"],
+    permissions: ["MANAGE_MESSAGES"],
     requiredRoles: [],
   },
   description: {

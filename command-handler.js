@@ -62,6 +62,12 @@ module.exports = async (client, Discord) => {
       );
     }
 
+    const text = 'kamtekbot';
+    const funResponse = new RegExp(`^${text}( |)`);
+    if (message.content.match(funResponse)) {
+      return message.channel.send('Tak sóham?')
+  }
+
     // Chat-Bot;
     if (message.channel.id === "822039637093515274") {
       fetch(

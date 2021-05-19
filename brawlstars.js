@@ -1,5 +1,5 @@
 const BrawlStars = require("brawlstars.js");
-const values = require("../../values");
+const values = require("./values");
 const brawlClient = new BrawlStars.Client(values.brawlStarsApiKey);
 const { MessageEmbed } = require("discord.js");
 
