@@ -1,7 +1,8 @@
 // Importowanie modułów;
 const fs = require("fs");
 const fetch = require("node-fetch");
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed, Collection } = require("discord.js");
+const ms = require("ms");
 // Importowanie prefixu z config'u;
 const { prefix } = require("./config.json");
 
@@ -62,11 +63,11 @@ module.exports = async (client, Discord) => {
       );
     }
 
-    const text = 'kamtekbot';
+    const text = "kamtekbot";
     const funResponse = new RegExp(`^${text}( |)`);
     if (message.content.match(funResponse)) {
-      return message.channel.send('Tak sóham?')
-  }
+      return message.channel.send("Tak sóham?");
+    }
 
     // Chat-Bot;
     if (message.channel.id === "822039637093515274") {
@@ -124,36 +125,55 @@ module.exports = async (client, Discord) => {
       }
     }
 
-    //If cooldowns map doesn't have a command.name key then create one.
-    if (!cooldowns.has(command.name)) {
-      cooldowns.set(command.name, new Discord.Collection());
-    }
+    // if (!cooldowns.has(command.name)) {
+    //   cooldowns.set(command.name, new Discord.Collection());
+    // }
 
-    const current_time = Date.now();
-    const time_stamps = cooldowns.get(command.name);
-    const cooldown_amount = command.user.cooldown * 1000;
+    // const current_time = Date.now();
+    // const time_stamps = cooldowns.get(command.name);
+    // const cooldown_amount = command.user.cooldown * 1000;
 
-    //If time_stamps has a key with the author's id then check the expiration time to send a message to a user.
-    if (time_stamps.has(message.author.id)) {
-      const expiration_time =
-        time_stamps.get(message.author.id) + cooldown_amount;
+    // if (time_stamps.has(message.author.id)) {
+    //   const expiration_time =
+    //     time_stamps.get(message.author.id) + cooldown_amount;
 
-      if (current_time < expiration_time) {
-        const time_left = (expiration_time - current_time) / 1000;
+    //   if (current_time < expiration_time) {
+    //     const time_left = (expiration_time - current_time) / 1000;
 
-        return message.reply(
-          `Please wait ${time_left.toFixed(1)} more seconds before using ${
-            command.name
-          }`
-        );
-      }
-    }
+    //     return message.channel.send(
+    //       new MessageEmbed()
+    //         .setColor("RED")
+    //         .setTitle("Error! (cooldown error)")
+    //         .setDescription(
+    //           `Musisz zaczekać jeszcze \`${ms(time_left)}\`, aby użyć komendę \`${command.name}\`!`
+    //         )
+    //         .setFooter(
+    //           `Komenda wywołana dla ${message.author.username}`,
+    //           message.author.displayAvatarURL()
+    //         )
+    //         .setTimestamp()
+    //     );
+    //   }
+    // }
 
-    //If the author's id is not in time_stamps then add them with the current time.
-    time_stamps.set(message.author.id, current_time);
-    //Delete the user's id once the cooldown is over.
-    setTimeout(() => time_stamps.delete(message.author.id), cooldown_amount);
+    // time_stamps.set(message.author.id, current_time);
+
+    // setTimeout(() => time_stamps.delete(message.author.id), cooldown_amount);
 
     command.callback(message, args, Discord, client);
   });
 };
+
+// // new MessageEmbed()
+// .setColor("RED")
+// .setTitle("Error! (cooldown error)")
+// .setDescription(
+//   `Musisz zaczekać jeszcze \`${ms(
+//     time_left
+//   )}\`, aby użyć komendę \`${command.name}\`!`
+// )
+// .setFooter(
+//   `Komenda wywołana dla ${message.author.username}`,
+//   message.author.displayAvatarURL()
+// )
+// .setTimestamp()

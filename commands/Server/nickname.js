@@ -15,7 +15,9 @@ module.exports = {
         new MessageEmbed()
           .setColor("RED")
           .setTitle("Error!")
-          .setDescription("Aby zmienić nick tą komendą, musisz zakupić item w sklepie serwerowym! (\`!shop\`)")
+          .setDescription(
+            "Aby zmienić nick tą komendą, musisz zakupić item w sklepie serwerowym! (`!shop`)"
+          )
           .setFooter(
             `Komenda wywołana dla ${message.author.username}`,
             message.author.displayAvatarURL()
@@ -25,6 +27,20 @@ module.exports = {
     }
 
     const newNickname = args.join(" ");
+    if (!newNickname) {
+      message.channel.send(
+        new MessageEmbed()
+          .setColor("RED")
+          .setTitle("Error!")
+          .setDescription("Nie podałeś nowego nickname'u!")
+          .setFooter(
+            `Komenda wywołana dla ${message.author.username}`,
+            message.author.displayAvatarURL()
+          )
+          .setTimestamp()
+      );
+      return;
+    }
 
     try {
       message.member.setNickname(newNickname);
